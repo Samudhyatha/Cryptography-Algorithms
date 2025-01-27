@@ -22,7 +22,7 @@ def vigenere_decrypt(cipher, key):
     return ''.join(decrypted)
 
 # Example usage
-if _name_ == "_main_":
+if  __name__ == "_main_":
     text = "HELLO"
     key = "KEY"
     key = generate_key(text, key)

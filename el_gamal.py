@@ -9,6 +9,12 @@ def modular_exponentiation(base, exp, mod):
         exp //= 2
     return result
 
+def mod_inverse(a, m):
+    for i in range(1, m):
+        if (a * i) % m == 1:
+            return i
+    return None
+
 def elgamal_encrypt(plaintext, p, e1, e2):
     r = random.randint(1, p - 1)
     c1 = modular_exponentiation(e1, r, p)
@@ -22,7 +28,7 @@ def elgamal_decrypt(c1, c2, d, p):
     return plaintext
 
 # Example usage
-if _name_ == "_main_":
+if __name__ == "__main__":
     p = 467  # Large prime
     e1 = 2   # Primitive root of p
     d = random.randint(1, p - 2)

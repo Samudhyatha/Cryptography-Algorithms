@@ -7,7 +7,7 @@ def extended_euclidean(a, b):
     return gcd, x, y
 
 # Example usage
-if _name_ == "_main_":
+if __name__ == "_main_":
     a, b = 30, 20
     gcd, x, y = extended_euclidean(a, b)
     print(f"GCD: {gcd}")
