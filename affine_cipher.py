@@ -30,9 +30,16 @@ def affine_decrypt(cipher, a, b, m=26):
     return decrypted
 
 # Example usage
-if __name__ == "_main_":
-    plaintext = "HELLO"
-    a, b = 5, 8  # Encryption keys
+if __name__ == "__main__":
+    # Get user input
+    plaintext = input("Enter the plaintext to encrypt: ")
+    a = int(input("Enter the value for a (should be coprime with 26): "))
+    b = int(input("Enter the value for b: "))
+
+    # Encrypt the input text
     ciphertext = affine_encrypt(plaintext, a, b)
     print(f"Encrypted: {ciphertext}")
-    print(f"Decrypted: {affine_decrypt(ciphertext, a, b)}")
+
+    # Decrypt the ciphertext
+    decrypted = affine_decrypt(ciphertext, a, b)
+    print(f"Decrypted: {decrypted}")

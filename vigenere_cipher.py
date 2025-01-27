@@ -22,10 +22,18 @@ def vigenere_decrypt(cipher, key):
     return ''.join(decrypted)
 
 # Example usage
-if  __name__ == "_main_":
-    text = "HELLO"
-    key = "KEY"
+if __name__ == "__main__":
+    # Get user input for the text and key
+    text = input("Enter the text to encrypt (uppercase letters only): ")
+    key = input("Enter the key (uppercase letters only): ")
+
+    # Generate the key to match the length of the text
     key = generate_key(text, key)
+
+    # Encrypt the text
     encrypted = vigenere_encrypt(text, key)
     print(f"Encrypted: {encrypted}")
-    print(f"Decrypted: {vigenere_decrypt(encrypted, key)}")
+
+    # Decrypt the text
+    decrypted = vigenere_decrypt(encrypted, key)
+    print(f"Decrypted: {decrypted}")

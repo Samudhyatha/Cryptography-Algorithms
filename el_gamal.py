@@ -15,30 +15,35 @@ def mod_inverse(a, m):
             return i
     return None
 
-def elgamal_encrypt(plaintext, p, e1, e2):
+def elgamal_encrypt(plaintext_number, p, e1, e2):
     r = random.randint(1, p - 1)
     c1 = modular_exponentiation(e1, r, p)
-    c2 = [(ord(char) * modular_exponentiation(e2, r, p)) % p for char in plaintext]
+    c2 = (plaintext_number * modular_exponentiation(e2, r, p)) % p
     return c1, c2
 
 def elgamal_decrypt(c1, c2, d, p):
     s = modular_exponentiation(c1, d, p)
     s_inv = mod_inverse(s, p)
-    plaintext = ''.join([chr((char * s_inv) % p) for char in c2])
-    return plaintext
+    plaintext_number = (c2 * s_inv) % p
+    return plaintext_number
 
 # Example usage
 if __name__ == "__main__":
-    p = 467  # Large prime
-    e1 = 2   # Primitive root of p
-    d = random.randint(1, p - 2)
+    # Get user input for public and private keys, and numeric plaintext
+    p = int(input("Enter a large prime number (p): "))
+    e1 = int(input("Enter the base (e1): "))
+    d = int(input("Enter the private key (d): "))
+
+    # Calculate e2 from e1 and d
     e2 = modular_exponentiation(e1, d, p)
 
-    plaintext = "HELLO"
-    c1, c2 = elgamal_encrypt(plaintext, p, e1, e2)
-    decrypted = elgamal_decrypt(c1, c2, d, p)
+    # Get numeric plaintext input (plaintext treated as a number)
+    plaintext_number = int(input("Enter the numeric plaintext to encrypt: "))
 
-    print(f"Public Key (p, e1, e2): ({p}, {e1}, {e2})")
-    print(f"Private Key (d): {d}")
+    # Encrypt the plaintext
+    c1, c2 = elgamal_encrypt(plaintext_number, p, e1, e2)
     print(f"Ciphertext: (c1={c1}, c2={c2})")
-    print(f"Decrypted: {decrypted}")
+
+    # Decrypt the ciphertext
+    decrypted_number = elgamal_decrypt(c1, c2, d, p)
+    print(f"Decrypted: {decrypted_number}")
